@@ -32,4 +32,39 @@ data/PAGOS.csv:    ASCII text
 
 Bear in mind that ASCII is included in ISO8859-1 (Latin) and both are included in UTF-8. All python strings are UTF-8 compatible but you need to specify the source data otherwise panda library will fail. That's why you see the encoding set to `ISO8859-1` in the `read_csv`.
 
+## Libraries
+
+We have developed some libraries that could be useful for this project.
+These libraries are just to standarize the input data and improve the way the ML algorithm works. For the
+sake of organization, all these libraries are included in `./lib`.
+
+
+### **`normalizer`**
+
+The `normalizer` library is a library we have developed to normalize the input data. Since in ML we can't use strings and it is better to group data into _not unique_ values we have created this `normalizer` libraries as helpers for normalizing our data.
+
+For example if you have values for example amounts. Often you don't care if the value is 1012.25 or 1010 or, even sometimes you want to group into bigger values, like 1100 is the same as 1000.
+
+Also `string` data type is not allowed for ML input algorithms so we need to convert them into numeric values.
+
+For all these kind of things we have created this library, so take a look at the library. We have documented each function of the library so it's easy to use.
+
+
+## Random Thoughts
+
+This section of the README.md is just to write down random thoughts I am thinking while working on this.
+
+## CREDITOS - MONTO
+
+It is interesting to see that we have amounts from 1 to 204663. The first one doesn't seems to be really useful, I really doubt someone can ask a credit for $1. However, the latter looks more likely to be a real vaule.
+
+```
+>>> everything["MONTO"].min()
+1.0
+>>> everything["MONTO"].max()
+204663.0
+>>>
+```
+
+So I have to count these values to know which ones are interesting to see and perhaps if we need to filter out these columns in some way:
 
