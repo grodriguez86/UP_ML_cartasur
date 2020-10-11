@@ -31,11 +31,7 @@
 #  incrementally starting from 1
 # --------------------------------------------------------------------
 def normalize_string(df, column):
-    unique_values = df[column].unique()
-    i = 1
-    for element in unique_values:
-        df = df[df[column] == element].apply(lambda x: i)
-        i += 1
+    return False # Have to reimplement this
 
 
 
@@ -51,11 +47,8 @@ def normalize_string(df, column):
 #  This is particularly useful when you WANT to know how the string
 #  values were replaced by numbers.
 # --------------------------------------------------------------------
-def normalize_string(df, column, mapping):
-    unique_values = df[column].unique()
-    for element in unique_values:
-        df = df[df[column] == element].apply(lambda x: mapping[element])
-
+def normalize_string_mapping(df, column, mapping):
+    df[column].replace(mapping, inplace=True)
 
 
 #  normalize_amount
