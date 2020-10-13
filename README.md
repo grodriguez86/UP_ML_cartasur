@@ -68,3 +68,11 @@ It is interesting to see that we have amounts from 1 to 204663. The first one do
 
 So I have to count these values to know which ones are interesting to see and perhaps if we need to filter out these columns in some way:
 
+## 2020-10-12
+
+I have added a few elements to cluster the elements using k-means. I still have no results on that, however
+I pushed the code because I think it's important to have that for future references.
+
+
+
+

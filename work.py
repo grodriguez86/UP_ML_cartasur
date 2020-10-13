@@ -3,6 +3,10 @@ import pandas as pd
 import numpy as np
 
 from sklearn.cluster import KMeans
+import matplotlib.pyplot as plt
+import seaborn as sb
+from mpl_toolkits.mplot3d import Axes3D
+
 
 from lib.normalizer import normalize_string_mapping
 from lib.normalizer import normalize_amount
@@ -85,6 +89,43 @@ normalize_string_mapping(selected_columns, "TIPOLABORAL", tipo_laboral)
 # Remove trailing spaces for "SUCURSAL_y" (some have trailing spaces)
 selected_columns["SUCURSAL_y"] = selected_columns["SUCURSAL_y"].str.strip()
 normalize_string_mapping(selected_columns, "SUCURSAL_y", sucursal_y)
+
+
+#  Percentage to use (since the dataset is HUGE), this
+#  speed up a little bit the calculation, after we know that's
+#  correct, we can go 100%
+# --------------------------------------------------------------------
+take_this_percentage=0.1
+fraction_of_set=take_this_percentage / 100.0
+
+# Do some kmeans
+X = selected_columns.sample(frac=fraction_of_set)
+kmeans = KMeans(n_clusters=4).fit(X)
+C = kmeans.cluster_centers_
+
+
+sb.pairplot(
+    selected_columns.sample(frac=fraction_of_set),
+    hue="METAL",
+    size=4,
+    vars=["MONTO", "SUCURSAL_y", "TIPOLABORAL"],
+    kind="scatter",
+    palette="afmhot"
+)
+
+# plt.show()    # you can use this here to look at the data
+
+
+##--------------------------------------------------------------------
+## THE FOLLOWING LINES CAN BE IGNORED
+##
+## I just wrote them down for learning purposes
+##--------------------------------------------------------------------
+X = np.array(selected_columns.sample(frac=fraction_of_set)[["MONTO", "SUCURSAL_y", "TIPOLABORAL"]])
+y = np.array(selected_columns.sample(frac=fraction_of_set)['METAL'])
+
+labels = kmeans.predict(X)
+C = kmeans.cluster_centers_
 
 
 selected_columns.describe()
