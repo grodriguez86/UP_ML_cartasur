@@ -1,5 +1,4 @@
 import pandas as pd
-from sklearn import datasets
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn import metrics
@@ -29,18 +28,18 @@ data_subset = selected_columns.sample(frac=0.10)
 
 data = pd.DataFrame(
     {
-        'monto':data_subset["MONTO"],
-        'ingreso_neto':data_subset["INGRESO_NETO"],
-        'tipo_laboral':data_subset["TIPOLABORAL"],
-        'sexo':data_subset["SEXO"],
-        'recibo':data_subset["RECIBO"],
-        'clase_plan':data_subset["CLASE_PLAN"],
-        'sucursal':data_subset["SUCURSAL_y"],
-        'metal':data_subset["METAL"]
+        'monto': data_subset["MONTO"],
+        'ingreso_neto': data_subset["INGRESO_NETO"],
+        'tipo_laboral': data_subset["TIPOLABORAL"],
+        'sexo': data_subset["SEXO"],
+        'recibo': data_subset["RECIBO"],
+        'clase_plan': data_subset["CLASE_PLAN"],
+        'sucursal': data_subset["SUCURSAL_y"],
+        'metal': data_subset["METAL"]
     }
 )
 
-X=data[
+X = data[
     [
         'monto',
         'ingreso_neto',
@@ -51,14 +50,13 @@ X=data[
         'sucursal'
     ]
 ]
-y=data['metal']
+y = data['metal']
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 
-clf=RandomForestClassifier(n_estimators=100)
+clf = RandomForestClassifier(n_estimators=100)
 
-clf.fit(X_train,y_train)
+clf.fit(X_train, y_train)
 
-y_pred=clf.predict(X_test)
-print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
-
+y_pred = clf.predict(X_test)
+print("Accuracy:", metrics.accuracy_score(y_test, y_pred))
