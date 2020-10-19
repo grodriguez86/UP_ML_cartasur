@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+
+#--------------------------------------------------------------------------
+#  THIS CODE WAS DEPRECATED
+#  the idea with this code was to make some initial investigation
+#  now the code is going to be split by algorithms
+#--------------------------------------------------------------------------
+
 import pandas as pd
 import numpy as np
 
@@ -16,10 +23,10 @@ from lib.normalizer import normalize_amount
 # --------------------------------------------------------------------
 separator = ";"
 encoding = "ISO8859-1"
-pagos = pd.read_csv("/Users/felix/Dropbox/universidad/2020/2do_cuatrimestre/machine_learning/UP_ML_cartasur/data/PAGOS.csv", sep=separator, encoding=encoding)
-cuotas = pd.read_csv("/Users/felix/Dropbox/universidad/2020/2do_cuatrimestre/machine_learning/UP_ML_cartasur/data/CUOTAS.csv", sep=separator, encoding=encoding)
-clientes = pd.read_csv("/Users/felix/Dropbox/universidad/2020/2do_cuatrimestre/machine_learning/UP_ML_cartasur/data/CLIENTES.csv", sep=separator, encoding=encoding)
-creditos = pd.read_csv("/Users/felix/Dropbox/universidad/2020/2do_cuatrimestre/machine_learning/UP_ML_cartasur/data/CREDITOS.csv", sep=separator, encoding=encoding)
+pagos = pd.read_csv("./data/PAGOS.csv", sep=separator, encoding=encoding)
+cuotas = pd.read_csv("./data/CUOTAS.csv", sep=separator, encoding=encoding)
+clientes = pd.read_csv("./data/CLIENTES.csv", sep=separator, encoding=encoding)
+creditos = pd.read_csv("./data/CREDITOS.csv", sep=separator, encoding=encoding)
 
 
 #  Merge some data
@@ -47,9 +54,9 @@ everything = everything.drop(labels=drop_columns, axis=1)
 
 desired_columns = [
     "MONTO",
-    "METAL",
     "TIPOLABORAL",
-    "SUCURSAL_y"
+    "SUCURSAL_y",
+    "METAL"
 ]
 selected_columns = everything[desired_columns]
 
@@ -64,7 +71,6 @@ tipo_laboral = {
     'Cooperativista'      : 1, 'Empleada Domestica'  : 2,
     'JUBILADO'            : 3, 'MONOTRIBUTISTA'      : 4,
     'NODEFINIDA'          : 5, 'PUBLICA'             : 6,
-    'Pension Graciable'   : 7, 'Plan Social'         : 8,
     'Privada'             : 9, 'SIN RECIBO'          : 10
 }
 
@@ -95,12 +101,12 @@ normalize_string_mapping(selected_columns, "SUCURSAL_y", sucursal_y)
 #  speed up a little bit the calculation, after we know that's
 #  correct, we can go 100%
 # --------------------------------------------------------------------
-take_this_percentage=0.1
+take_this_percentage=5
 fraction_of_set=take_this_percentage / 100.0
 
 # Do some kmeans
 X = selected_columns.sample(frac=fraction_of_set)
-kmeans = KMeans(n_clusters=4).fit(X)
+kmeans = KMeans(n_clusters=5).fit(X)
 C = kmeans.cluster_centers_
 
 
