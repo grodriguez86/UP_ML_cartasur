@@ -15,5 +15,5 @@ print("[i] Cluster Centers")
 print(kmeans.cluster_centers_)
 
 print("[i] Distributions")
-ps = pd.Series(model.labels_)
+ps = pd.Series(kmeans.labels_)
 print(ps.value_counts())
