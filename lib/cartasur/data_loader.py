@@ -38,9 +38,9 @@ def load_merge_all_datasets(dataset_directory, drop_columns=None):
 
     print("[i] Merging Datasets")
     start = time.time()
-    everything = clientes.merge(creditos, left_on="ID_CLIENTE", right_on="ID_CLIENTE")
-    everything = everything.merge(pagos, left_on="ID_CREDITO", right_on="ID_CREDITO")
-    everything = everything.merge(cuotas, left_on="ID_CREDITO", right_on="ID_CREDITO")
+    temp1 = clientes.merge(creditos, left_on="ID_CLIENTE", right_on="ID_CLIENTE")
+    temp2 = temp1.merge(pagos, left_on="ID_CREDITO", right_on="ID_CREDITO")
+    everything = temp2.merge(cuotas, left_on="ID_CREDITO", right_on="ID_CREDITO")
     end = time.time()
     print("Finished in {} secs".format(round(end-start, 2)))
 
