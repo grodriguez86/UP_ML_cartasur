@@ -28,10 +28,10 @@ def load_dataset(filename):
 def load_merge_all_datasets(dataset_directory, drop_columns=None):
     print("[i] Loading Datasets")
     start = time.time()
-    pagos = load_dataset("{}/PAGOS.csv".format(dataset_directory))
-    cuotas = load_dataset("{}/CUOTAS.csv".format(dataset_directory))
-    clientes = load_dataset("{}/CLIENTES.csv".format(dataset_directory))
-    creditos = load_dataset("{}/CREDITOS.csv".format(dataset_directory))
+    pagos = load_dataset("{}PAGOS.csv".format(dataset_directory))
+    cuotas = load_dataset("{}CUOTAS.csv".format(dataset_directory))
+    clientes = load_dataset("{}CLIENTES.csv".format(dataset_directory))
+    creditos = load_dataset("{}CREDITOS.csv".format(dataset_directory))
     end = time.time()
     print("Finished in {} secs".format(round(end-start,2)))
 
