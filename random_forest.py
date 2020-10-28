@@ -1,3 +1,4 @@
+import time
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
@@ -5,6 +6,7 @@ from sklearn import metrics
 
 from lib.cartasur.data_loader import load_merge_all_datasets
 
+start = time.time()
 iris = load_merge_all_datasets("./data/")
 
 desired_columns = [
@@ -60,3 +62,6 @@ clf.fit(X_train, y_train)
 
 y_pred = clf.predict(X_test)
 print("Accuracy:", metrics.accuracy_score(y_test, y_pred))
+
+end = time.time()
+print("TOTAL time {} secs".format(round(end-start,2)))

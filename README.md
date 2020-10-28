@@ -2,6 +2,11 @@
 
 ## CHANGELOG
 
+### NEXT
+
+- Plot clusters in 3D
+https://www.aprendemachinelearning.com/k-means-en-python-paso-a-paso/
+
 ### 2020-10-18
 
 Abandoned `work.py` in favor of a better organization of the code. Basically now we need to have files
